@@ -31,26 +31,106 @@ const login = () => {
     const loginForm = $("#loginForm");
     const loginMsg = $("#loginMsg");
     const loginBtn = $("#loginBtn");
-    if (loginForm && loginMsg && loginBtn) {
+    const usernameElement = $("#username");
+    const passwordElement = $("#password");
+    if (loginForm && loginMsg && loginBtn && usernameElement && passwordElement) {
+        const toggleBtn = document.querySelector(".toggle-password");
+        const addError = (el) => {
+            if (!el) {
+                return;
+            }
+            el.classList.remove("shake");
+            el.offsetWidth;
+            el.classList.add("input-error", "shake");
+            if (el.id === "password") {
+                if (!toggleBtn) {
+                    return;
+                }
+                toggleBtn.classList.remove("shake");
+                toggleBtn.offsetWidth;
+                toggleBtn.classList.add("input-error", "shake");
+                toggleBtn.addEventListener("animationend", () => toggleBtn.classList.remove("shake"), { once: true });
+            }
+            el.addEventListener("animationend", () => el.classList.remove("shake"), { once: true });
+        };
+        const removeError = (el) => {
+            if (!el) {
+                return;
+            }
+            el.classList.remove("input-error", "shake");
+        };
+        if (toggleBtn && passwordElement) {
+            const svgNS = "http://www.w3.org/2000/svg";
+            const eyeOnIcon = () => {
+                const svg = document.createElementNS(svgNS, "svg");
+                svg.setAttribute("viewBox", "0 0 24 24");
+                svg.setAttribute("width", "22");
+                svg.setAttribute("height", "22");
+                svg.setAttribute("stroke", "currentColor");
+                svg.setAttribute("fill", "none");
+                svg.setAttribute("stroke-width", "2");
+                svg.setAttribute("stroke-linecap", "round");
+                svg.setAttribute("stroke-linejoin", "round");
+                const path = document.createElementNS(svgNS, "path");
+                path.setAttribute("d", "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z");
+                const circle = document.createElementNS(svgNS, "circle");
+                circle.setAttribute("cx", "12");
+                circle.setAttribute("cy", "12");
+                circle.setAttribute("r", "3");
+                svg.append(path);
+                svg.append(circle);
+                return svg;
+            };
+            const eyeOffIcon = () => {
+                const svg = document.createElementNS(svgNS, "svg");
+                svg.setAttribute("viewBox", "0 0 24 24");
+                svg.setAttribute("width", "22");
+                svg.setAttribute("height", "22");
+                svg.setAttribute("stroke", "currentColor");
+                svg.setAttribute("fill", "none");
+                svg.setAttribute("stroke-width", "2");
+                svg.setAttribute("stroke-linecap", "round");
+                svg.setAttribute("stroke-linejoin", "round");
+                const path = document.createElementNS(svgNS, "path");
+                path.setAttribute("d", "M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.84 21.84 0 0 1 5.05-6.91M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a21.89 21.89 0 0 1-4.9 6.84M1 1l22 22");
+                svg.appendChild(path);
+                return svg;
+            };
+            toggleBtn.replaceChildren(eyeOffIcon());
+            toggleBtn.addEventListener("click", () => {
+                const show = passwordElement.type === "password";
+                passwordElement.type = show ? "text" : "password";
+                toggleBtn.setAttribute("aria-pressed", show ? "true" : "false");
+                toggleBtn.replaceChildren(show ? eyeOnIcon() : eyeOffIcon());
+                passwordElement.focus();
+            });
+        }
+        usernameElement.addEventListener("input", () => removeError(usernameElement));
+        passwordElement.addEventListener("input", () => removeError(passwordElement));
         loginForm.addEventListener("submit", (e) => __awaiter(void 0, void 0, void 0, function* () {
-            var _a, _b;
             e.preventDefault();
             loginMsg.textContent = "";
-            const username = ((_a = $("#username")) === null || _a === void 0 ? void 0 : _a.value.trim()) || "";
-            const password = ((_b = $("#password")) === null || _b === void 0 ? void 0 : _b.value.trim()) || "";
+            const username = usernameElement.value.trim() || "";
+            const password = passwordElement.value.trim() || "";
+            removeError(usernameElement);
+            removeError(passwordElement);
             if (!username && !password) {
                 loginMsg.textContent = "Username dan password harus diisi.";
                 loginMsg.style.color = "crimson";
+                addError(usernameElement);
+                addError(passwordElement);
                 return;
             }
             if (!username && password) {
                 loginMsg.textContent = "Username harus diisi.";
                 loginMsg.style.color = "crimson";
+                addError(usernameElement);
                 return;
             }
             if (username && !password) {
                 loginMsg.textContent = "Password tidak boleh kosong.";
                 loginMsg.style.color = "crimson";
+                addError(passwordElement);
                 return;
             }
             loginBtn.disabled = true;
@@ -65,10 +145,12 @@ const login = () => {
                 if (!user) {
                     loginMsg.textContent = "Username tidak ditemukan.";
                     loginMsg.style.color = "crimson";
+                    addError(usernameElement);
                 }
                 else if (user.password !== password) {
                     loginMsg.textContent = "Password salah.";
                     loginMsg.style.color = "crimson";
+                    addError(passwordElement);
                 }
                 else {
                     localStorage.setItem("rc_firstName", user.firstName);

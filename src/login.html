@@ -5,20 +5,35 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Login - Recipe Collection</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="login.css" />
   </head>
   <body data-page="login">
     <main class="centered">
       <div class="card auth-card">
         <h1>Recipe Collection</h1>
+
         <form id="loginForm">
-          <label
-            >Username
+          <label>
+            Username
+            <span class="required">*</span>
             <input type="text" id="username" novalidate />
           </label>
-          <label
-            >Password
-            <input type="password" id="password" novalidate />
+
+          <label>
+            Password
+            <span class="required">*</span>
+            <div class="password-wrapper">
+              <input type="password" id="password" novalidate />
+              <button
+                type="button"
+                class="toggle-password"
+                aria-label="Tampilkan kata sandi"
+                aria-pressed="false"
+                title="Tampilkan / Sembunyikan kata sandi"
+              ></button>
+            </div>
           </label>
+
           <button type="submit" id="loginBtn">Login</button>
           <div id="loginMsg" class="msg"></div>
         </form>
