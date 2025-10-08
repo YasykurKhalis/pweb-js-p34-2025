@@ -8,7 +8,9 @@
   </head>
   <body data-page="recipes">
     <header class="navbar">
-      <div class="brand">Recipe Collection</div>
+      <div class="brand">
+        <h1>Recipe Collection</h1>
+      </div>
       <div class="nav-actions">
         <span id="greeting"></span>
         <button id="logoutBtn" class="btn small">Logout</button>
@@ -28,14 +30,14 @@
 
       <section id="recipesList" class="grid"></section>
 
-      <div class="centered">
+      <div class="centered-btn">
         <button id="showMoreBtn" class="btn">Show More</button>
       </div>
 
       <!-- Modal untuk full recipe -->
       <div id="modal" class="modal hidden">
         <div class="modal-content">
-          <button id="closeModal" class="close">x</button>
+          <button id="closeModal" class="close">X</button>
           <div id="modalBody"></div>
         </div>
       </div>

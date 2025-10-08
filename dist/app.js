@@ -194,7 +194,7 @@ const recipes = () => {
         console.warn("Halaman resep: satu atau lebih elemen hilang.");
         return;
     }
-    greeting.textContent = `Hi, ${firstName}!`;
+    greeting.innerHTML = `Hi, <strong>${firstName}!</strong>`;
     logoutBtn.addEventListener("click", () => {
         localStorage.clear();
         window.location.href = "login.html";

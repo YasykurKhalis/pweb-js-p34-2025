@@ -1,3 +1,10 @@
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 label .required {
     color: var(--accent);
     margin-left: 0.25rem;
