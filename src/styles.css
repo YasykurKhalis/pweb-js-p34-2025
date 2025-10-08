@@ -148,6 +148,7 @@ button.btn.small {
   padding: 0.6rem;
   background: #fff;
   height: 100%;
+  outline: none;
 }
 
 /* === GRID & CARD === */
