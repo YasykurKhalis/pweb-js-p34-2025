@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Recipes - Recipe Collection</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="recipes">
+    <header class="navbar">
+      <div class="brand">Recipe Collection</div>
+      <div class="nav-actions">
+        <span id="greeting"></span>
+        <button id="logoutBtn" class="btn small">Logout</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="controls">
+        <input
+          id="searchInput"
+          placeholder="Search recipes, cuisine, ingredients, tags..."
+        />
+        <select id="cuisineFilter">
+          <option value="">All Cuisines</option>
+        </select>
+      </section>
+
+      <section id="recipesList" class="grid"></section>
+
+      <div class="centered">
+        <button id="showMoreBtn" class="btn">Show More</button>
+      </div>
+
+      <!-- Modal untuk full recipe -->
+      <div id="modal" class="modal hidden">
+        <div class="modal-content">
+          <button id="closeModal" class="close">x</button>
+          <div id="modalBody"></div>
+        </div>
+      </div>
+
+      <div id="recipesMsg" class="msg"></div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

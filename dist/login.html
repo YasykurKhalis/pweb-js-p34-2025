@@ -6,18 +6,18 @@
     <title>Login - Recipe Collection</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body data-page="login">
     <main class="centered">
       <div class="card auth-card">
         <h1>Recipe Collection</h1>
         <form id="loginForm">
           <label
             >Username
-            <input type="text" id="username" required />
+            <input type="text" id="username" novalidate />
           </label>
           <label
             >Password
-            <input type="password" id="password" required />
+            <input type="password" id="password" novalidate />
           </label>
           <button type="submit" id="loginBtn">Login</button>
           <div id="loginMsg" class="msg"></div>
