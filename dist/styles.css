@@ -3,22 +3,26 @@
   --card-bg: #fff;
   --muted: #666;
 }
+
+/* === RESET & GLOBAL === */
 * {
   box-sizing: border-box;
 }
 body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
-    Arial;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
   margin: 0;
-  background: #f5f7fb;
+  background: #cc211b;
   color: #111;
 }
+
+/* === LAYOUT === */
 .centered {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
+
 .card {
   background: var(--card-bg);
   padding: 1.6rem;
@@ -27,6 +31,8 @@ body {
   width: 100%;
   max-width: 420px;
 }
+
+/* === AUTH / FORM === */
 .auth-card h1 {
   text-align: center;
   margin: 0 0 1rem;
@@ -61,6 +67,8 @@ button.btn.small {
   margin-top: 0.6rem;
   color: var(--muted);
 }
+
+/* === NAVBAR === */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -69,6 +77,15 @@ button.btn.small {
   box-shadow: 0 2px 8px rgba(2, 6, 23, 0.06);
   align-items: center;
 }
+.navbar h1 {
+  font-size: 1.2rem;
+}
+.navbar nav {
+  display: flex;
+  gap: 1rem;
+}
+
+/* === CONTAINER & CONTENT === */
 .container {
   padding: 1.2rem;
   max-width: 1100px;
@@ -82,6 +99,8 @@ button.btn.small {
 .controls input {
   flex: 1;
 }
+
+/* === GRID & CARD === */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -126,6 +145,11 @@ button.btn.small {
   align-items: center;
   margin-top: 0.8rem;
 }
+.rating {
+  color: goldenrod;
+}
+
+/* === MODAL === */
 .modal {
   position: fixed;
   inset: 0;
@@ -156,16 +180,56 @@ button.btn.small {
   background: transparent;
   font-size: 1.6rem;
 }
-.rating {
-  color: goldenrod;
+
+/* === RESPONSIVE === */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
 }
-.centered {
-  display: flex;
-  justify-content: center;
-}
+
+/* HP */
 @media (max-width: 600px) {
   .centered {
     height: auto;
     padding: 2rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recipe-card img {
+    height: 140px;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    padding: 0.8rem;
+  }
+
+  button {
+    width: 100%;
   }
 }
